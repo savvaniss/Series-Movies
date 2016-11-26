@@ -30,6 +30,20 @@
                                 <span class="help-block">{{ errors.content | first }}</span>
                             {% endif %}
                         </div>
+                        <div class="form-group{{ errors.actor ? ' has-error' : '' }}">
+                            <label for="actor">Actors</label>
+                            <input type="text" name="actor" id="actor" placeholder="actor1,actor2,actor3..." class="form-control" value="{{ old.actor }}">
+                            {% if errors.actor %}
+                                <span class="help-block">{{ errors.actor | first }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group{{ errors.releasedday ? ' has-error' : '' }}">
+                            <label for="releasedday">Release day</label>
+                            <input type="datetime" name="releasedday" id="releasedday"  class="form-control" value="{{ old.releasedday }}">
+                            {% if errors.releasedday %}
+                                <span class="help-block">{{ errors.releasedday | first }}</span>
+                            {% endif %}
+                        </div>
                         <div class="form-group{{ errors.tag ? ' has-error' : '' }}">
                             <label for="tag">Tags</label>
                             <input type="text" name="tag" id="tag" placeholder="tag1,tag2,tag3..." class="form-control" value="{{ old.tag }}">

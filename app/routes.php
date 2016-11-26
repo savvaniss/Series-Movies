@@ -27,5 +27,6 @@ $app->group('', function (){
 $app->group('', function (){
     $this->get('/admin/users', 'UsersController:index')->setName('admin.users');
     $this->post('/admin/users', 'UsersController:updateUser')->setName('admin.users.update');
-    $this->get('/series/create', 'SeriesController:createSeries')->setName('series.create');
+    $this->get('/series/create', 'SeriesController:getCreateSeries')->setName('series.create');
+    $this->post('/series/create', 'SeriesController:postCreateSeries');
 })->add(new AdminMiddleware($container));
