@@ -57,3 +57,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 composer.lock
+phinx.yml
