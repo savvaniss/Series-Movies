@@ -29,7 +29,8 @@ class CreateSeriesTable extends AbstractMigration
     public function up()
     {
         $users=$this->table('series');
-        $users->addColumn('name', 'string', array('limit' => 50))
+        $users->addColumn('name', 'string', array('limit' => 120))
+             ->$users->addColumn('slug', 'string', array('limit' => 120))
             ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG))
             ->addColumn('releasedday', 'timestamp', array('null' => true))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
