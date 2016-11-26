@@ -100,6 +100,11 @@ $container['csrf'] = function ($container){
     return new \Slim\Csrf\Guard;
 };
 
+$container['SeriesController'] = function ($container){
+    return new \App\Controllers\SeriesController($container);
+};
+
+
 $app->add(new \App\Middleware\RouteMiddleware($container));
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
