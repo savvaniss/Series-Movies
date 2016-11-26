@@ -1,0 +1,53 @@
+{% extends 'templates/app.twig'%}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Users</div>
+                <div class="panel-body">
+                    <form action="{{ path_for('admin.users.update') }}" method="post">
+                        <div class="form-group col-md-4">
+                            <label for="UserAction">Select Action</label>
+                            <select name="UserAction" class="form-control">
+                                <option selected="selected" value="delete">Delete Selected</option>
+                                <option value="block">Block Selected</option>
+                                <option value="unblock">Unblock Selected</option>
+                            </select>
+                        </div>
+                        <div class="form-group table-responsive col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Joined</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                <tr class="{{ (user.deleted == 1 ? 'danger' : (user.blocked == 1 ? 'warning' : '')) }}">
+                                    <td scope="row"><input type="checkbox" name="check[]" value="{{ user.id }}"></td>
+                                    <td scope="row">{{ user.id }}</td>
+                                    <td scope="row">{{ user.name }}</td>
+                                    <td scope="row">{{ user.email }}</td>
+                                    <td scope="row">{{ user.created_at }}</td>
+                                    <td scope="row">{{ (user.deleted == 1 ? 'Deleted' : (user.blocked == 1 ? 'Blocked' : 'Active')) }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-default">Update</button>
+                            {{ csrf.field | raw }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
