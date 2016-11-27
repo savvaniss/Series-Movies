@@ -9,11 +9,21 @@
 namespace App\Models;
 
 
-class Tag
+use Illuminate\Database\Eloquent\Model;
+
+class Tag extends Model
 {
     protected $table='tags';
     protected $fillable = [
         'value'
     ];
+
+    public function actors(){
+        return $this->belongsToMany('App\Models\Actor');
+    }
+
+    public function series(){
+        return $this->belongsToMany('App\Models\Series');
+    }
 
 }

@@ -14,4 +14,12 @@ class Actor extends Model
         'description'
     ];
 
+    public function series(){
+        return $this->belongsToMany('App\Models\Series');
+    }
+
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag');
+    }
+
 }

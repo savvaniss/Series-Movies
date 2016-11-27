@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Actor extends Model
+class Series extends Model
 {
     protected $table='series';
     protected $fillable = [
@@ -12,5 +12,13 @@ class Actor extends Model
         'release_day',
         'slug'
     ];
+
+    public function actors(){
+        return $this->belongsToMany('App\Models\Actor');
+    }
+
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag');
+    }
 
 }
