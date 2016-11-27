@@ -1,6 +1,8 @@
 {% extends 'templates/app.twig'%}
 
 {% block extralinks %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>tinymce.init({
             selector: '#description',
@@ -37,19 +39,19 @@
                                 <span class="help-block">{{ errors.actor | first }}</span>
                             {% endif %}
                         </div>
-                        <div class="form-group{{ errors.release_day ? ' has-error' : '' }}">
-                            <label for="release_day">Release day</label>
-                            <input type="datetime" name="release_day" id="release_day"  class="form-control" value="{{ old.release_day }}">
-                            {% if errors.release_day %}
-                                <span class="help-block">{{ errors.release_day | first }}</span>
-                            {% endif %}
-                        </div>
                         <div class="form-group{{ errors.tag ? ' has-error' : '' }}">
                             <label for="tag">Tags</label>
                             <input type="text" name="tag" id="tag" placeholder="tag1,tag2,tag3..." class="form-control" value="{{ old.tag }}">
                             {% if errors.tag %}
                                 <span class="help-block">{{ errors.tag | first }}</span>
                             {% endif %}
+                        </div>
+                        <div class="input-group date">
+                            <label for="release_day">Release day</label>
+                            <input type="text" id="release_day" name="release_day"class="form-control" value="12-02-2012">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-default">Save your Series</button>
 
@@ -59,4 +61,7 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#release_day').datepicker();
+    </script>
 {% endblock %}
