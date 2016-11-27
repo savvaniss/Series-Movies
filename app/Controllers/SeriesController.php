@@ -18,6 +18,12 @@ class SeriesController extends Controller
     }
 
     public function postCreateSeries($request,$response){
+
+//        //image
+//        $image=$request->getUploadedFiles();
+//        var_dump($image);
+//        die();
+
         //validate input
         $validation = $this->validator->validate($request, [
             // ->emailAvailable()
@@ -67,7 +73,7 @@ class SeriesController extends Controller
             $series->actors()->attach($createdActor[$actor]);
 
         }
-
+        
         $this->flash->addMessage('success', 'Your Series created!');
         return $response->withRedirect($this->router->pathFor('series.show'));
 

@@ -10,6 +10,8 @@
             toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | code",
             menubar: "file edit view format insert tools",
         });</script>
+    <link rel="stylesheet" href="{{ base_url() }}/css/series.create.css">
+    <script src="{{ base_url() }}/js/series.create.js"></script>
 {% endblock %}
 {% block content %}
     <div class="raw">
@@ -17,7 +19,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add new Series</div>
                 <div class="panel-body">
-                    <form action="{{ path_for('series.create') }}" method="post" autocomplete="off">
+                    <form action="{{ path_for('series.create') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                         <div class="form-group{{ errors.name ? ' has-error' : '' }}">
                             <label for="name">name </label>
                             <input type="text" name="name" id="name" placeholder="Your series name" class="form-control" value="{{ old.name  }}">
@@ -46,13 +48,31 @@
                                 <span class="help-block">{{ errors.tag | first }}</span>
                             {% endif %}
                         </div>
+                        <label for="release_day">Release day</label>
                         <div class="input-group date">
-                            <label for="release_day">Release day</label>
-                            <input type="text" id="release_day" name="release_day"class="form-control" value="12-02-2012">
+                            <input type="text" id="release_day" name="release_day" class="form-control" value="12-02-2016">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
                         </div>
+
+                        <label for="filename">Upload a file</label>
+                                    <div class="input-group image-preview">
+
+                                        <input type="text" name="filename" id="filename" class="form-control image-preview-filename" disabled="disabled">
+                                        <span class="input-group-btn">
+                                           <!-- image-preview-clear button -->
+                                           <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                           <span class="glyphicon glyphicon-remove"></span> Clear
+                                           </button>
+                                                                        <!-- image-preview-input -->
+                                           <div class="btn btn-default image-preview-input">
+                                              <span class="glyphicon glyphicon-folder-open"></span>
+                                              <span class="image-preview-input-title">Browse</span>
+                                              <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/>
+                                           </div>
+                                        </span>
+                                    </div>
                         <button type="submit" class="btn btn-default">Save your Series</button>
 
                         {{ csrf.field | raw }}
