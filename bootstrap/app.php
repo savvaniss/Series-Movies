@@ -104,6 +104,13 @@ $container['SeriesController'] = function ($container){
     return new \App\Controllers\SeriesController($container);
 };
 
+$container['slug'] = function ($container) {
+    return new \Cocur\Slugify\Slugify;
+};
+
+$container['carbon']= function($container){
+    return new \Carbon\Carbon;
+};
 
 $app->add(new \App\Middleware\RouteMiddleware($container));
 $app->add(new \App\Middleware\ValidationErrorsMiddleware($container));

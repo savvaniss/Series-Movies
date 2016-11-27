@@ -8,7 +8,9 @@
         "slim/flash": "^0.1.0",
         "hassankhan/config": "^0.10.0",
         "phpmailer/phpmailer": "^5.2",
-        "robmorgan/phinx": "^0.6.5"
+        "robmorgan/phinx": "^0.6.5",
+        "Cocur/Slugify": "^2.3",
+        "nesbot/carbon": "^1.21"
     },
     "autoload": {
         "psr-4": {

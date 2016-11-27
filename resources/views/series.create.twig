@@ -16,18 +16,18 @@
                 <div class="panel-heading">Add new Series</div>
                 <div class="panel-body">
                     <form action="{{ path_for('series.create') }}" method="post" autocomplete="off">
-                        <div class="form-group{{ errors.title ? ' has-error' : '' }}">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" placeholder="Your series name" class="form-control" value="{{ old.title }}">
-                            {% if errors.email %}
-                                <span class="help-block">{{ errors.title | first }}</span>
+                        <div class="form-group{{ errors.name ? ' has-error' : '' }}">
+                            <label for="name">name </label>
+                            <input type="text" name="name" id="name" placeholder="Your series name" class="form-control" value="{{ old.name  }}">
+                            {% if errors.name  %}
+                                <span class="help-block">{{ errors.name | first }}</span>
                             {% endif %}
                         </div>
-                        <div class="form-group{{ errors.content ? ' has-error' : '' }}">
-                            <label for="content">Your series description</label>
-                            <textarea class="form-control" id="content" name="content">Here you can write your description</textarea>
-                            {% if errors.content %}
-                                <span class="help-block">{{ errors.content | first }}</span>
+                        <div class="form-group{{ errors.description ? ' has-error' : '' }}">
+                            <label for="description">Your series description</label>
+                            <textarea class="form-control" id="description" name="description">Here you can write your description</textarea>
+                            {% if errors.description %}
+                                <span class="help-block">{{ errors.description | first }}</span>
                             {% endif %}
                         </div>
                         <div class="form-group{{ errors.actor ? ' has-error' : '' }}">
@@ -37,11 +37,11 @@
                                 <span class="help-block">{{ errors.actor | first }}</span>
                             {% endif %}
                         </div>
-                        <div class="form-group{{ errors.releasedday ? ' has-error' : '' }}">
-                            <label for="releasedday">Release day</label>
-                            <input type="datetime" name="releasedday" id="releasedday"  class="form-control" value="{{ old.releasedday }}">
-                            {% if errors.releasedday %}
-                                <span class="help-block">{{ errors.releasedday | first }}</span>
+                        <div class="form-group{{ errors.release_day ? ' has-error' : '' }}">
+                            <label for="release_day">Release day</label>
+                            <input type="datetime" name="release_day" id="release_day"  class="form-control" value="{{ old.release_day }}">
+                            {% if errors.release_day %}
+                                <span class="help-block">{{ errors.release_day | first }}</span>
                             {% endif %}
                         </div>
                         <div class="form-group{{ errors.tag ? ' has-error' : '' }}">

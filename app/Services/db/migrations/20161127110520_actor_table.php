@@ -29,8 +29,7 @@ class ActorTable extends AbstractMigration
     public function up()
     {
         $actors=$this->table('actors');
-        $actors->addColumn('first_name', 'string', array('limit' => 120))
-            ->addColumn('last_name', 'string', array('limit' => 120))
+        $actors->addColumn('full_name', 'string', array('limit' => 120))
             ->addColumn('slug', 'string', array('limit' => 240))
             ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG,'null' => true))
             ->addColumn('born_day', 'timestamp', array('null' => true))
