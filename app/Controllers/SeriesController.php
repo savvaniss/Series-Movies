@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Actor;
 use App\Models\Series;
 use App\Models\Tag;
 use Slim\Views\Twig as View;
@@ -22,6 +23,7 @@ class SeriesController extends Controller
             // ->emailAvailable()
             'name' => v::notEmpty(),
             'description' => v::notEmpty(),
+            'actor' => v::notEmpty(),
             'release_day'=>v::date()
         ]);
         if ($validation->failed()) {
@@ -42,7 +44,6 @@ class SeriesController extends Controller
 
         //explode tags in array split by comma
         $tags=explode(',',$request->getParam('tag'));
-        $tagIds=array();
         foreach($tags as $tag){
             //create new tag in database
             $createdTag[$tag]=Tag::create([
@@ -54,5 +55,25 @@ class SeriesController extends Controller
 
         }
 
+        //explode actors
+        $actors=explode(',',$request->getParam('actor'));
+        foreach($actors as $actor){
+            //create new tag in database
+            $createdActor[$actor]=Actor::create([
+                'full_name' => $actor,
+                'slug' => $slug->slugify($actor)
+            ]);
+            //define tag with many to many relationship
+            $series->actors()->attach($createdActor[$actor]);
+
+        }
+
+        $this->flash->addMessage('success', 'Your Series created!');
+        return $response->withRedirect($this->router->pathFor('series.show'));
+
     }
+
+        public function getShowSeries($request, $response){
+            return $this->container->view->render($response, 'series.show.twig');
+        }
 }

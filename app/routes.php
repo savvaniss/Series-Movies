@@ -21,9 +21,10 @@ $app->group('', function (){
     $this->get('/auth/signout', 'AuthController:getSignOut')->setName('auth.signout');
     $this->get('/auth/password/change', 'PasswordController:getChangePassword')->setName('auth.password.change');
     $this->post('/auth/password/change', 'PasswordController:postChangePassword');
+    $this->get('/series/show',  'SeriesController:getShowSeries')->setName('series.show');
 })->add(new AuthMiddleware($container));
 
-//fir admin users
+//for admin users
 $app->group('', function (){
     $this->get('/admin/users', 'UsersController:index')->setName('admin.users');
     $this->post('/admin/users', 'UsersController:updateUser')->setName('admin.users.update');
