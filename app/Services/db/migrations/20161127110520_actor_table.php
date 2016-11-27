@@ -32,7 +32,7 @@ class ActorTable extends AbstractMigration
         $actors->addColumn('first_name', 'string', array('limit' => 120))
             ->addColumn('last_name', 'string', array('limit' => 120))
             ->addColumn('slug', 'string', array('limit' => 240))
-            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG))
+            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG,'null' => true))
             ->addColumn('born_day', 'timestamp', array('null' => true))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('null' => true))
