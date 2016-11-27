@@ -3,7 +3,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateSeriesTable extends AbstractMigration
+class ActorTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -28,11 +28,12 @@ class CreateSeriesTable extends AbstractMigration
      */
     public function up()
     {
-        $users=$this->table('series');
-        $users->addColumn('name', 'string', array('limit' => 120))
-            ->addColumn('slug', 'string', array('limit' => 120))
+        $actors=$this->table('actors');
+        $actors->addColumn('first_name', 'string', array('limit' => 120))
+            ->addColumn('last_name', 'string', array('limit' => 120))
+            ->addColumn('slug', 'string', array('limit' => 240))
             ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG))
-            ->addColumn('release_day', 'timestamp', array('null' => true))
+            ->addColumn('born_day', 'timestamp', array('null' => true))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('null' => true))
             ->save();
@@ -41,6 +42,6 @@ class CreateSeriesTable extends AbstractMigration
     }
 
     public function down(){
-        $this->dropTable('series');
+        $this->dropTable('actors');
     }
 }

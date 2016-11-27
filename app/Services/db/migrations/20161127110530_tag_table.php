@@ -1,9 +1,8 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateSeriesTable extends AbstractMigration
+class TagTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -26,13 +25,12 @@ class CreateSeriesTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
+
     public function up()
     {
-        $users=$this->table('series');
-        $users->addColumn('name', 'string', array('limit' => 120))
+        $tags=$this->table('tags');
+        $tags->addColumn('value', 'string', array('limit' => 120))
             ->addColumn('slug', 'string', array('limit' => 120))
-            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG))
-            ->addColumn('release_day', 'timestamp', array('null' => true))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('null' => true))
             ->save();
@@ -41,6 +39,7 @@ class CreateSeriesTable extends AbstractMigration
     }
 
     public function down(){
-        $this->dropTable('series');
+        $this->dropTable('tags');
     }
+
 }

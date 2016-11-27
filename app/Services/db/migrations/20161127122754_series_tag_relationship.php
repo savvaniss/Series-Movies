@@ -1,9 +1,8 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateSeriesTable extends AbstractMigration
+class SeriesTagRelationship extends AbstractMigration
 {
     /**
      * Change Method.
@@ -26,21 +25,21 @@ class CreateSeriesTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function up()
-    {
-        $users=$this->table('series');
-        $users->addColumn('name', 'string', array('limit' => 120))
-            ->addColumn('slug', 'string', array('limit' => 120))
-            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG))
-            ->addColumn('release_day', 'timestamp', array('null' => true))
+    public function up(){
+        $series_tag=$this->table('series_tag');
+        $series_tag->addColumn('series_id', 'integer')
+            ->addColumn('tag_id', 'integer')
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('null' => true))
             ->save();
-
+        $series_tag
+            ->addForeignKey('tag_id', 'tags', 'id', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'))
+            ->addForeignKey('series_id', 'series', 'id', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'))
+            ->save();
 
     }
 
     public function down(){
-        $this->dropTable('series');
+        $this->dropTable('series_tag');
     }
 }
