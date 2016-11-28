@@ -12,6 +12,7 @@ use Carbon\Carbon as carbon;
 
 class SeriesController extends Controller
 {
+    protected $datadir='datahouse';
     public function getCreateSeries($request,$response)
     {
         return $this->container->view->render($response, 'series.create.twig');
@@ -19,9 +20,19 @@ class SeriesController extends Controller
 
     public function postCreateSeries($request,$response){
 
-//        //image
 //        $image=$request->getUploadedFiles();
 //        var_dump($image);
+//        echo "error";
+//        var_dump($image['input-file-preview']->getError());
+//        echo "mediatype";
+//        var_dump($image['input-file-preview']->getClientMediaType());
+//        echo "filename";
+//        var_dump($image['input-file-preview']->getClientFilename());
+//        echo "size";
+//        var_dump($image['input-file-preview']->getSize());
+//        echo "stream";
+//        var_dump($image['input-file-preview']->getStream());
+//        //moveTo();
 //        die();
 
         //validate input

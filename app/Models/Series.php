@@ -10,15 +10,22 @@ class Series extends Model
         'name',
         'description',
         'release_day',
-        'slug'
+        'slug',
+        'commentable_id',
+        
     ];
-
+    
+    //many to many relationship with actors
     public function actors(){
         return $this->belongsToMany('App\Models\Actor');
     }
-
+    //many to many relationship with tags
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
+    }
+    //morph relatioship for images
+    public function images(){
+        return $this->morphMany('App\Models\Image');
     }
 
 }
