@@ -1,9 +1,8 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Adapter\MysqlAdapter;
 
-class ActorTable extends AbstractMigration
+class CreateImageTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -27,19 +26,24 @@ class ActorTable extends AbstractMigration
      * with the Table class.
      */
     public function up(){
-        $actors=$this->table('actors');
-        $actors->addColumn('full_name', 'string', array('limit' => 120))
+        //create table for polymorfic relationship
+        //both for series and Actor also slug for url
+        $images=$this->table('images');
+        $images->addColumn('filename', 'string', array('limit' => 120))
+            ->addColumn('hash', 'string', array('limit' => 240))
             ->addColumn('slug', 'string', array('limit' => 240))
-            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG,'null' => true))
-            ->addColumn('born_day', 'timestamp', array('null' => true))
+            ->addColumn('size', 'string', array('limit' => 240))
+            ->addColumn('uploaded_dir', 'string', array('limit' => 240))
+            ->addColumn('imagenable_id','integer')
+            ->addColumn('imagenable_type','string', array('limit' => 120))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->addColumn('updated_at', 'timestamp', array('null' => true))
+            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();
 
 
     }
 
     public function down(){
-        $this->dropTable('actors');
+        $this->dropTable('images');
     }
 }
