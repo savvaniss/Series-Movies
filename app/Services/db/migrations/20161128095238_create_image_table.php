@@ -33,6 +33,7 @@ class CreateImageTable extends AbstractMigration
             ->addColumn('hash', 'string', array('limit' => 240))
             ->addColumn('slug', 'string', array('limit' => 240))
             ->addColumn('size', 'string', array('limit' => 240))
+            ->addColumn('content_type', 'string', array('limit' => 240))
             ->addColumn('uploaded_dir', 'string', array('limit' => 240))
             ->addColumn('imagenable_id','integer')
             ->addColumn('imagenable_type','string', array('limit' => 120))

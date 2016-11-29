@@ -6,6 +6,7 @@ use App\Middleware\AdminMiddleware;
 
 //for all users
 $app->get('/', 'HomeController:index')->setName('home');
+$app->get('/image/{name}', 'FileController:getImage')->setName('image');
 
 //for guest, no logins users
 $app->group('', function (){
