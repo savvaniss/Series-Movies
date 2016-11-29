@@ -15,7 +15,10 @@
                {{ image['filename'] }}
            <br/>
            {% endfor %}
-           {{ series.actors }}
+           {% for actor in series.actors %}
+              {{ actor.full_name }}
+           {% endfor %}
+           
            <br/>
            <hr>
      {% endfor %}
