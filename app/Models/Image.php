@@ -12,8 +12,6 @@ class Image extends Model
         'slug',
         'size',
         'uploaded_dir',
-        'commentable_id',
-        'commentable_type'
     ];
     
     public function imagenable(){

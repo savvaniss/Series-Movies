@@ -15,6 +15,9 @@ class DataApi{
     
     //check if datadir exist if not create it
     public function __construct (){
+         if(!file_exists(__DIR__ . '/../'.$this->datadir)){
+             mkdir(__DIR__ . '/../'.$this->datadir);
+         }
     }
     //calculate hash for given file
             
@@ -26,11 +29,13 @@ class DataApi{
     //if file hash same hash mean it is the same file. no reason to reupload
     //only add entry in database
     public function hashExistInData($hash){
-        if(file_exists(__DIR__ . '/../'.$datadir.'/'.$hash)){
+        if(file_exists(__DIR__ . '/../'.$this->datadir.'/'.$hash)){
             return true;
         }
         return false;
     } 
+    
+    
     //check if more than 1 record for this file exist in db.
     // if yes return true. if one record or less exist return false
     public function hashHasMamyRecords(){

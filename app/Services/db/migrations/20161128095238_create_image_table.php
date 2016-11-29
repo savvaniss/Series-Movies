@@ -34,8 +34,8 @@ class CreateImageTable extends AbstractMigration
             ->addColumn('slug', 'string', array('limit' => 240))
             ->addColumn('size', 'string', array('limit' => 240))
             ->addColumn('uploaded_dir', 'string', array('limit' => 240))
-            ->addColumn('commentable_id','integer')
-            ->addColumn('commentable_type','string', array('limit' => 120))
+            ->addColumn('imagenable_id','integer')
+            ->addColumn('imagenable_type','string', array('limit' => 120))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();

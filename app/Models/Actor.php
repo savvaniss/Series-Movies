@@ -25,7 +25,7 @@ class Actor extends Model
     
     //morph relatioship for images
     public function images(){
-        return $this->morphMany('App\Models\Image');
+        return $this->morphMany('App\Models\Image', 'imagenable');
     }
 
 }
