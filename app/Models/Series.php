@@ -11,7 +11,6 @@ class Series extends Model
         'description',
         'release_day',
         'slug',
-        'commentable_id',
         
     ];
     

@@ -121,6 +121,9 @@ class SeriesController extends Controller
     }
 
         public function getShowSeries($request, $response){
+            $allSeries = Series::all();
+            
+            $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
             return $this->container->view->render($response, 'series.show.twig');
         }
 }

@@ -1,5 +1,22 @@
 {% extends 'templates/app.twig'%}
 
 {% block content %}
-    series.show
+     {% for series in allSeries %}
+           {{ series.name}}
+            <br/>
+           {{series.description}}
+           <br/>
+           {% for tag in series.tags %}
+           {# {{ dump(tag) }}#}
+           {{ tag.value }}
+           <br/>
+           {% endfor %}
+           {% for image in series.images %}
+               {{ image['filename'] }}
+           <br/>
+           {% endfor %}
+           {{ series.actors }}
+           <br/>
+           <hr>
+     {% endfor %}
 {% endblock %}
