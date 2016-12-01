@@ -104,6 +104,10 @@ $container['SeriesController'] = function ($container){
     return new \App\Controllers\SeriesController($container);
 };
 
+$container['FileController'] = function ($container){
+    return new \App\Controllers\FileController($container);
+};
+
 $container['slug'] = function ($container) {
     return new \Cocur\Slugify\Slugify;
 };

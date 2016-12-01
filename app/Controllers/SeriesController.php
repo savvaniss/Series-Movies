@@ -89,6 +89,7 @@ class SeriesController extends Controller
        $imageFilename=$image['input-file-preview']->getClientFilename();
        $imageSize=$image['input-file-preview']->getSize();
        $imageHash=$dataApi->calculateHash($imageFilename);
+        $contentType=$image['input-file-preview']->getClientMediaType();
        
        //check if file exist in datadir
        if(!$dataApi->hashExistInData($imageHash)){
@@ -100,6 +101,7 @@ class SeriesController extends Controller
            $image->hash=$imageHash;
            $image->slug=$slug->slugify($image->name);
            $image->size=$imageSize;
+           $image->content_type=$contentType;
            $image->uploaded_dir=__DIR__ . '/../'.$this->datadir.'/'.$imageHash;
        }else{
            //if file exist with the same hash then our file exist from onother upload
@@ -110,6 +112,7 @@ class SeriesController extends Controller
            $image->hash=$imageExist->hash;
            $image->slug=$imageExist->slug;
            $image->size=$imageExist->size;
+           $image->content_type=$contentType;
            $image->uploaded_dir=$imageExist->uploaded_dir;
        }
        //save image in database
@@ -121,6 +124,9 @@ class SeriesController extends Controller
     }
 
         public function getShowSeries($request, $response){
+            $allSeries = Series::all();
+            
+            $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
             return $this->container->view->render($response, 'series.show.twig');
         }
 }
