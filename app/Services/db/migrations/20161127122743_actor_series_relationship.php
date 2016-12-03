@@ -32,7 +32,7 @@ public function up(){
     $actor_series->addColumn('actor_id', 'integer')
         ->addColumn('series_id', 'integer')
         ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-        ->addColumn('updated_at', 'timestamp', array('null' => true))
+        ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
         ->save();
     $actor_series
         ->addForeignKey('series_id', 'series', 'id', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'))

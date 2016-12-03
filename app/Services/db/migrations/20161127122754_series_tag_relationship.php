@@ -30,7 +30,7 @@ class SeriesTagRelationship extends AbstractMigration
         $series_tag->addColumn('series_id', 'integer')
             ->addColumn('tag_id', 'integer')
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->addColumn('updated_at', 'timestamp', array('null' => true))
+            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();
         $series_tag
             ->addForeignKey('tag_id', 'tags', 'id', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'))

@@ -99,7 +99,7 @@ class SeriesController extends Controller
            $image=new Image;
            $image->filename=$imageFilename;
            $image->hash=$imageHash;
-           $image->slug=$slug->slugify($image->name);
+           $image->slug=$slug->slugify($image->filename);
            $image->size=$imageSize;
            $image->content_type=$contentType;
            $image->uploaded_dir=__DIR__ . '/../'.$this->datadir.'/'.$imageHash;

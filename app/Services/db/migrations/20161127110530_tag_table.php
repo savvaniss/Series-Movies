@@ -32,7 +32,7 @@ class TagTable extends AbstractMigration
         $tags->addColumn('value', 'string', array('limit' => 120))
             ->addColumn('slug', 'string', array('limit' => 120))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->addColumn('updated_at', 'timestamp', array('null' => true))
+            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();
 
 
