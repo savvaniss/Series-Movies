@@ -5,7 +5,7 @@
 
 
         <div class="row">
-            {% for series in allSeries  %}
+            {% for series in allSeries|reverse  %}
                 <div class="well">
 
                     <div class="media">
@@ -14,7 +14,7 @@
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">{{ series.name }}</h4>
-                            <p class="text-right">By {{  users[post.id][0].name }}</p>
+                            <p class="text-right">Director: {{  users[post.id][0].name }}</p>
                             <p>
                                 {{ series.description|length > 50 ? series.description|striptags|slice(0, 3000) | raw   : series.description |raw }}
                                 {{ series.description|length > 50 ? '...' : '' }}</p>
@@ -23,6 +23,7 @@
                                     continue reading...
                                 </a>
                             </p>
+
 
                             <ul class="list-inline list-unstyled">
                                 <li><span><i class="glyphicon glyphicon-calendar"></i> {{ series.created_at }} </span></li>
@@ -42,6 +43,11 @@
                                     <span><i class="fa fa-facebook-square"></i></span>
                                     <span><i class="fa fa-twitter-square"></i></span>
                                     <span><i class="fa fa-google-plus-square"></i></span>
+                                </li>
+                                <li>
+                                    {% for tag in series.tags %}
+                                     <span><i><a href="{{ tag.value }}">{{ tag.value }}{% if not loop.last %},{% endif %}</a></i></span>
+                                    {% endfor %}
                                 </li>
                             </ul>
                         </div>

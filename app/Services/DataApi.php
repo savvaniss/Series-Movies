@@ -34,13 +34,6 @@ class DataApi{
         }
         return false;
     } 
-    
-    
-    //check if more than 1 record for this file exist in db.
-    // if yes return true. if one record or less exist return false
-    public function hashHasMamyRecords(){
-    
-    }
-    
+
    
 }

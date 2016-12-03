@@ -94,7 +94,7 @@ class SeriesController extends Controller
        //check if file exist in datadir
        if(!$dataApi->hashExistInData($imageHash)){
           //if not exist den we move it in upload dir 
-           var_dump( move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash)) ;
+           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash) ;
           //and we make a new entry in database
            $image=new Image;
            $image->filename=$imageFilename;
