@@ -127,6 +127,17 @@ class SeriesController extends Controller
             $allSeries = Series::all();
             
             $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
-            return $this->container->view->render($response, 'series.show.twig');
+            return $this->view->render($response, 'series.show.twig');
+        }
+
+        public function singleSeries($request, $response){
+            $series=Series::where('slug','=',$request->getAttribute('routeInfo')[2]['slug'])->first();
+            if($series){
+                $this->view->getEnvironment()->addGlobal('series',$series);
+                $this->view->render($response, 'series.single.twig');
+            }else{
+                $this->view->render($response, '404.twig');
+                return $response->withStatus(404);
+            }
         }
 }

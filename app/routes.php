@@ -23,6 +23,7 @@ $app->group('', function (){
     $this->get('/auth/password/change', 'PasswordController:getChangePassword')->setName('auth.password.change');
     $this->post('/auth/password/change', 'PasswordController:postChangePassword');
     $this->get('/series/show',  'SeriesController:getShowSeries')->setName('series.show');
+    $this->get('/series/show/single/{slug}', 'SeriesController:singleSeries')->setName('series.single');
 })->add(new AuthMiddleware($container));
 
 //for admin users
