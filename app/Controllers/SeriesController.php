@@ -6,6 +6,7 @@ use App\Models\Actor;
 use App\Models\Series;
 use App\Models\Tag;
 use App\Models\Image;
+use App\Models\Director;
 use Slim\Views\Twig as View;
 use Respect\Validation\Validator as v;
 use Cocur\Slugify\Slugify as slug;
@@ -27,6 +28,7 @@ class SeriesController extends Controller
         
        //get files
        $image=$request->getUploadedFiles();
+
        //if image has error do not proceed
        if($image['input-file-preview']->getError()){
            $this->flash->addMessage('error', 'your image faled to upload');
@@ -38,8 +40,10 @@ class SeriesController extends Controller
             // ->emailAvailable()
             'name' => v::notEmpty(),
             'description' => v::notEmpty(),
+            'director' => v::notEmpty(),
             'actor' => v::notEmpty(),
-            'release_day'=>v::date()
+            'release_day'=>v::date(),
+            'trailer' =>v::videoUrl()
         ]);
         if ($validation->failed()) {
             $this->flash->addMessage('error', 'Your series was unable to create');
@@ -55,8 +59,17 @@ class SeriesController extends Controller
             'name' => $request->getParam('name'),
             'description' => $request->getParam('description'),
             'release_day' => $date,
-            'slug' => $sluglified
+            'slug' => $sluglified,
+            'trailer_url' =>$request->getParam('trailer')
         ]);
+
+        //create director
+        $createdDirector=Director::create([
+           'full_name'=> $request->getParam('director'),
+            'slug' => $slug->slugify($request->getParam('director'))
+        ]);
+        $series->directors()->attach($createdDirector);
+
             
         //explode tags in array split by comma
         $tags=explode(',',$request->getParam('tag'));
@@ -74,7 +87,7 @@ class SeriesController extends Controller
         //explode actors
         $actors=explode(',',$request->getParam('actor'));
         foreach($actors as $actor){
-            //create new tag in database
+            //create new actor in database
             $createdActor[$actor]=Actor::create([
                 'full_name' => $actor,
                 'slug' => $slug->slugify($actor)
@@ -88,7 +101,7 @@ class SeriesController extends Controller
        $dataApi=new DataApi;
        $imageFilename=$image['input-file-preview']->getClientFilename();
        $imageSize=$image['input-file-preview']->getSize();
-       $imageHash=$dataApi->calculateHash($imageFilename);
+       $imageHash=$dataApi->calculateHash($image['input-file-preview']->file);
         $contentType=$image['input-file-preview']->getClientMediaType();
        
        //check if file exist in datadir

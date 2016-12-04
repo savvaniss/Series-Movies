@@ -3,7 +3,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateSeriesTable extends AbstractMigration
+class AddTableDirector extends AbstractMigration
 {
     /**
      * Change Method.
@@ -26,13 +26,12 @@ class CreateSeriesTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function up()
-    {
-        $series=$this->table('series');
-        $series->addColumn('name', 'string', array('limit' => 120))
-            ->addColumn('slug', 'string', array('limit' => 120))
+    public function up(){
+        $directors=$this->table('directors');
+        $directors->addColumn('full_name', 'string', array('limit' => 120))
+            ->addColumn('slug', 'string', array('limit' => 240))
             ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG,'null' => true))
-            ->addColumn('release_day', 'timestamp', array('null' => true))
+            ->addColumn('born_day', 'timestamp', array('null' => true))
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();
@@ -41,6 +40,7 @@ class CreateSeriesTable extends AbstractMigration
     }
 
     public function down(){
-        $this->dropTable('series');
+        $this->dropTable('directors');
     }
+
 }
