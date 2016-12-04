@@ -34,6 +34,13 @@
                                 <span class="help-block">{{ errors.description | first }}</span>
                             {% endif %}
                         </div>
+                        <div class="form-group{{ errors.trailer ? ' has-error' : '' }}">
+                            <label for="actor">Trailer</label>
+                            <input type="text" name="trailer" id="trailer" placeholder="Trailer Url" class="form-control" value="{{ old.trailer }}">
+                            {% if errors.trailer %}
+                                <span class="help-block">{{ errors.trailer | first }}</span>
+                            {% endif %}
+                        </div>
                         <div class="form-group{{ errors.actor ? ' has-error' : '' }}">
                             <label for="actor">Actors</label>
                             <input type="text" name="actor" id="actor" placeholder="actor1,actor2,actor3..." class="form-control" value="{{ old.actor }}">

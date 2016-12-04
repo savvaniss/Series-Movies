@@ -1,9 +1,8 @@
 <?php
 
 use Phinx\Migration\AbstractMigration;
-use Phinx\Db\Adapter\MysqlAdapter;
 
-class CreateSeriesTable extends AbstractMigration
+class AlterTableSeriesAddField extends AbstractMigration
 {
     /**
      * Change Method.
@@ -26,21 +25,16 @@ class CreateSeriesTable extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function up()
-    {
+    public function up(){
         $series=$this->table('series');
-        $series->addColumn('name', 'string', array('limit' => 120))
-            ->addColumn('slug', 'string', array('limit' => 120))
-            ->addColumn('description', 'text', array('limit' => MysqlAdapter::TEXT_LONG,'null' => true))
-            ->addColumn('release_day', 'timestamp', array('null' => true))
-            ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->save();
-
+        $series->addColumn('trailer_url', 'string', array('limit' => 255))->save();
 
     }
 
     public function down(){
-        $this->dropTable('series');
+        $series = $this->table('series');
+        $series->removeColumn('trailer_url')
+            ->save();
+
     }
 }

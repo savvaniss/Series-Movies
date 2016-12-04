@@ -39,7 +39,8 @@ class SeriesController extends Controller
             'name' => v::notEmpty(),
             'description' => v::notEmpty(),
             'actor' => v::notEmpty(),
-            'release_day'=>v::date()
+            'release_day'=>v::date(),
+            'trailer' =>v::videoUrl()
         ]);
         if ($validation->failed()) {
             $this->flash->addMessage('error', 'Your series was unable to create');
@@ -55,7 +56,8 @@ class SeriesController extends Controller
             'name' => $request->getParam('name'),
             'description' => $request->getParam('description'),
             'release_day' => $date,
-            'slug' => $sluglified
+            'slug' => $sluglified,
+            'trailer_url' =>$request->getParam('trailer')
         ]);
             
         //explode tags in array split by comma

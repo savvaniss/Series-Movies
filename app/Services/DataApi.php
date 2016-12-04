@@ -22,6 +22,7 @@ class DataApi{
     //calculate hash for given file
             
     public function calculateHash($file){
+        $file=file_get_contents($file);
         return md5($file);
     }
     

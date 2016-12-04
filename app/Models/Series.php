@@ -11,6 +11,7 @@ class Series extends Model
         'description',
         'release_day',
         'slug',
+        'trailer_url'
         
     ];
     
