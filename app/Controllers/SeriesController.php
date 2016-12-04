@@ -27,6 +27,8 @@ class SeriesController extends Controller
         
        //get files
        $image=$request->getUploadedFiles();
+//        var_dump($image);
+//        die();
        //if image has error do not proceed
        if($image['input-file-preview']->getError()){
            $this->flash->addMessage('error', 'your image faled to upload');
@@ -90,7 +92,7 @@ class SeriesController extends Controller
        $dataApi=new DataApi;
        $imageFilename=$image['input-file-preview']->getClientFilename();
        $imageSize=$image['input-file-preview']->getSize();
-       $imageHash=$dataApi->calculateHash($imageFilename);
+       $imageHash=$dataApi->calculateHash($image['input-file-preview']->file);
         $contentType=$image['input-file-preview']->getClientMediaType();
        
        //check if file exist in datadir
