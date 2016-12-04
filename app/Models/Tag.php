@@ -27,4 +27,8 @@ class Tag extends Model
         return $this->belongsToMany('App\Models\Series');
     }
 
+    public function directors(){
+        return $this->belongsToMany('App\Models\Director');
+    }
+
 }

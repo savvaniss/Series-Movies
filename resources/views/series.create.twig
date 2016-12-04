@@ -41,6 +41,13 @@
                                 <span class="help-block">{{ errors.trailer | first }}</span>
                             {% endif %}
                         </div>
+                        <div class="form-group{{ errors.director ? ' has-error' : '' }}">
+                            <label for="director">Director Name </label>
+                            <input type="text" name="director" id="director" placeholder="Directors Name" class="form-control" value="{{ old.director  }}">
+                            {% if errors.director  %}
+                                <span class="help-block">{{ errors.director | first }}</span>
+                            {% endif %}
+                        </div>
                         <div class="form-group{{ errors.actor ? ' has-error' : '' }}">
                             <label for="actor">Actors</label>
                             <input type="text" name="actor" id="actor" placeholder="actor1,actor2,actor3..." class="form-control" value="{{ old.actor }}">

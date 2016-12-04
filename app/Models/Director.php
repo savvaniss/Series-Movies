@@ -3,33 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Series extends Model
+class Director extends Model
 {
-    protected $table='series';
+    protected $table='directors';
     protected $fillable = [
-        'name',
-        'description',
-        'release_day',
+        'full_name',
+        'born_day',
         'slug',
-        'trailer_url'
-        
+        'description'
     ];
-    
-    //many to many relationship with actors
-    public function actors(){
-        return $this->belongsToMany('App\Models\Actor');
+
+    //many to many relationship with series
+    public function series(){
+        return $this->belongsToMany('App\Models\Series');
     }
+
     //many to many relationship with tags
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
     }
+
     //morph relatioship for images
     public function images(){
         return $this->morphMany('App\Models\Image', 'imagenable');
-    }
-
-    public function directors(){
-        return $this->belongsToMany('App\Models\Director');
     }
 
 }

@@ -29,7 +29,7 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading"><h2><a href="{{ path_for('series.single',{'slug': series.slug}) }}">{{ series.name }}</a></h2></h4>
-                        <p class="text-right">Director: {{  users[post.id][0].name }}</p>
+                        <p class="text-right">Director: {{  series.directors[0].full_name }}</p>
                         <p>
                             {{ series.description |raw }}
                         </p>
@@ -68,7 +68,8 @@
         <div class="col-lg-3">
         </div>
         <div class="col-lg-6">
-            
+
+
             <a href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="{{ series.trailer_url }}" >Watch Trailer</a>
             <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
                 <div class="modal-dialog">
