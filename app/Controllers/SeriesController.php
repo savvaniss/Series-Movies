@@ -94,12 +94,12 @@ class SeriesController extends Controller
        //check if file exist in datadir
        if(!$dataApi->hashExistInData($imageHash)){
           //if not exist den we move it in upload dir 
-           var_dump( move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash)) ;
+           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash) ;
           //and we make a new entry in database
            $image=new Image;
            $image->filename=$imageFilename;
            $image->hash=$imageHash;
-           $image->slug=$slug->slugify($image->name);
+           $image->slug=$slug->slugify($image->filename);
            $image->size=$imageSize;
            $image->content_type=$contentType;
            $image->uploaded_dir=__DIR__ . '/../'.$this->datadir.'/'.$imageHash;
@@ -127,6 +127,17 @@ class SeriesController extends Controller
             $allSeries = Series::all();
             
             $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
-            return $this->container->view->render($response, 'series.show.twig');
+            return $this->view->render($response, 'series.show.twig');
+        }
+
+        public function singleSeries($request, $response){
+            $series=Series::where('slug','=',$request->getAttribute('routeInfo')[2]['slug'])->first();
+            if($series){
+                $this->view->getEnvironment()->addGlobal('series',$series);
+                $this->view->render($response, 'series.single.twig');
+            }else{
+                $this->view->render($response, '404.twig');
+                return $response->withStatus(404);
+            }
         }
 }

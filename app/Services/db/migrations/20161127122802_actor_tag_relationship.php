@@ -30,7 +30,7 @@ class ActorTagRelationship extends AbstractMigration
         $actor_tag->addColumn('actor_id', 'integer')
             ->addColumn('tag_id', 'integer')
             ->addColumn('created_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
-            ->addColumn('updated_at', 'timestamp', array('null' => true))
+            ->addColumn('updated_at', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->save();
         $actor_tag
             ->addForeignKey('tag_id', 'tags', 'id', array('delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'))
