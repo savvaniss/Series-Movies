@@ -16,7 +16,7 @@ use App\Services\DataApi;
 
 class SeriesController extends Controller
 {
-    protected $datadir='datahouse';
+    protected $datadir='files';
     
     
     public function getCreateSeries($request,$response)
@@ -107,7 +107,7 @@ class SeriesController extends Controller
        //check if file exist in datadir
        if(!$dataApi->hashExistInData($imageHash)){
           //if not exist den we move it in upload dir 
-           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash) ;
+           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../../resources/'.$this->datadir.'/'.$imageHash) ;
           //and we make a new entry in database
            $image=new Image;
            $image->filename=$imageFilename;
@@ -115,7 +115,7 @@ class SeriesController extends Controller
            $image->slug=$slug->slugify($image->filename);
            $image->size=$imageSize;
            $image->content_type=$contentType;
-           $image->uploaded_dir=__DIR__ . '/../'.$this->datadir.'/'.$imageHash;
+           $image->uploaded_dir=__DIR__ . '/../../resources/'.$this->datadir.'/'.$imageHash;
        }else{
            //if file exist with the same hash then our file exist from onother upload
            //find it in database and make new entry

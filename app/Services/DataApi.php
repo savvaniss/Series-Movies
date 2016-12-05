@@ -10,13 +10,13 @@ namespace App\Services;
 //Also for deletion will first check if onother Actor or Series has entry in database
 //only if it is the last entry then we delete file also. elseware we delete only the entry
 class DataApi{
-    protected $datadir='datahouse';
+    protected $datadir='files';
     
     
-    //check if datadir exist if not create it
+    //check if directory files exist if not create it
     public function __construct (){
-         if(!file_exists(__DIR__ . '/../'.$this->datadir)){
-             mkdir(__DIR__ . '/../'.$this->datadir);
+         if(!file_exists(__DIR__ . '/../../resources/'.$this->datadir)){
+             mkdir(__DIR__ . '/../../resources/'.$this->datadir);
          }
     }
     //calculate hash for given file
@@ -30,7 +30,7 @@ class DataApi{
     //if file hash same hash mean it is the same file. no reason to reupload
     //only add entry in database
     public function hashExistInData($hash){
-        if(file_exists(__DIR__ . '/../'.$this->datadir.'/'.$hash)){
+        if(file_exists(__DIR__ . '/../../resources/'.$this->datadir.'/'.$hash)){
             return true;
         }
         return false;
