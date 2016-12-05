@@ -132,22 +132,22 @@ class SeriesController extends Controller
        $series->images()->save($image);
    
         $this->flash->addMessage('success', 'Your Series created!');
-        return $response->withRedirect($this->router->pathFor('series.show'));
+        return $response->withRedirect($this->router->pathFor('series'));
 
     }
 
-        public function getShowSeries($request, $response){
+        public function getSeries($request, $response){
             $allSeries = Series::all();
             
             $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
-            return $this->view->render($response, 'series.show.twig');
+            return $this->view->render($response, 'series.twig');
         }
 
-        public function singleSeries($request, $response){
+        public function getSeriesPost($request, $response){
             $series=Series::where('slug','=',$request->getAttribute('routeInfo')[2]['slug'])->first();
             if($series){
                 $this->view->getEnvironment()->addGlobal('series',$series);
-                $this->view->render($response, 'series.single.twig');
+                $this->view->render($response, 'series.post.twig');
             }else{
                 $this->view->render($response, '404.twig');
                 return $response->withStatus(404);
