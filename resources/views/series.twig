@@ -13,7 +13,7 @@
                             <img class="media-object" src="{{ path_for('image',{'name': series.images[0].filename}) }}" alt="series.images[0].filename" width="150" height="150">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><h2><a href="{{ path_for('series.single',{'slug': series.slug}) }}">{{ series.name }}</a></h2></h4>
+                            <h4 class="media-heading"><h2><a href="{{ path_for('series.post',{'slug': series.slug}) }}">{{ series.name }}</a></h2></h4>
                             <p class="text-right">Director: {{  series.directors[0].full_name }}</p>
                             <p>
                                 {{ series.description|length > 50 ? series.description|striptags|slice(0, 3000) | raw   : series.description |raw }}

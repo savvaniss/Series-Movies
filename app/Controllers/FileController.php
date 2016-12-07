@@ -7,7 +7,7 @@ use App\Models\Image;
 
 class FileController extends Controller
 {
-    protected $datadir='datahouse';
+    protected $datadir='files';
     //return image from $datadir base on file name
     public function getImage($request,$response){
         //get image name
@@ -19,11 +19,11 @@ class FileController extends Controller
         $image=Image::where('filename', '=' , $imageName)->first();
         //var_dump($image);
         //
-        if(__DIR__ . '/../'.$this->datadir.'/'.$image->hash === FALSE) {
+        if(__DIR__ . '/../../resources/'.$this->datadir.'/'.$image->hash === FALSE) {
             $handler = $this->notFoundHandler;
             return $handler($request, $response);
         }
-        $data = file_get_contents(__DIR__ . '/../'.$this->datadir.'/'.$image->hash);
+        $data = file_get_contents(__DIR__ . '/../../resources/'.$this->datadir.'/'.$image->hash);
         $header="$image->content_type; charset=utf-8";
         $response->write($data);
         return $response->withHeader('Content-Type', $header);

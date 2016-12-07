@@ -16,7 +16,7 @@ use App\Services\DataApi;
 
 class SeriesController extends Controller
 {
-    protected $datadir='datahouse';
+    protected $datadir='files';
     
     
     public function getCreateSeries($request,$response)
@@ -107,7 +107,7 @@ class SeriesController extends Controller
        //check if file exist in datadir
        if(!$dataApi->hashExistInData($imageHash)){
           //if not exist den we move it in upload dir 
-           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../'.$this->datadir.'/'.$imageHash) ;
+           move_uploaded_file($image['input-file-preview']->file,__DIR__ . '/../../resources/'.$this->datadir.'/'.$imageHash) ;
           //and we make a new entry in database
            $image=new Image;
            $image->filename=$imageFilename;
@@ -115,7 +115,7 @@ class SeriesController extends Controller
            $image->slug=$slug->slugify($image->filename);
            $image->size=$imageSize;
            $image->content_type=$contentType;
-           $image->uploaded_dir=__DIR__ . '/../'.$this->datadir.'/'.$imageHash;
+           $image->uploaded_dir=__DIR__ . '/../../resources/'.$this->datadir.'/'.$imageHash;
        }else{
            //if file exist with the same hash then our file exist from onother upload
            //find it in database and make new entry
@@ -132,22 +132,22 @@ class SeriesController extends Controller
        $series->images()->save($image);
    
         $this->flash->addMessage('success', 'Your Series created!');
-        return $response->withRedirect($this->router->pathFor('series.show'));
+        return $response->withRedirect($this->router->pathFor('series'));
 
     }
 
-        public function getShowSeries($request, $response){
+        public function getSeries($request, $response){
             $allSeries = Series::all();
             
             $this->view->getEnvironment()->addGlobal('allSeries',$allSeries);
-            return $this->view->render($response, 'series.show.twig');
+            return $this->view->render($response, 'series.twig');
         }
 
-        public function singleSeries($request, $response){
+        public function getSeriesPost($request, $response){
             $series=Series::where('slug','=',$request->getAttribute('routeInfo')[2]['slug'])->first();
             if($series){
                 $this->view->getEnvironment()->addGlobal('series',$series);
-                $this->view->render($response, 'series.single.twig');
+                $this->view->render($response, 'series.post.twig');
             }else{
                 $this->view->render($response, '404.twig');
                 return $response->withStatus(404);
