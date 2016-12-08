@@ -3,6 +3,8 @@
 
 use Respect\Validation\Validator as v;
 use Noodlehaus\Config;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 session_start();
 
@@ -63,6 +65,7 @@ $container['view'] = function($container){
     $view->getEnvironment()->addGlobal('auth', [
         'check' => $container->auth->check(),
         'user' => $container->auth->user(),
+        'isAdmin' =>$container->auth->isAdmin()
     ]);
     $view->getEnvironment()->addGlobal('flash', $container->flash);
     return $view;

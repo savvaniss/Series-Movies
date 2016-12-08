@@ -16,8 +16,8 @@
         $(document).ready(function(){
             autoPlayYouTubeModal();
         });
-
     </script>
+    <link rel="stylesheet" href="{{ base_url() }}/css/series.post.css">
 {% endblock %}
 {% block content %}
     <div class="row">
@@ -67,10 +67,8 @@
     <div class="row">
         <div class="col-lg-3">
         </div>
-        <div class="col-lg-6">
-
-
-            <a href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="{{ series.trailer_url }}" >Watch Trailer</a>
+        <div class="col-lg-3">
+            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#videoModal" data-theVideo="{{ series.trailer_url }}" >Watch Trailer</a>
             <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -84,6 +82,34 @@
                 </div>
             </div>
         </div>
+        {% if auth.isAdmin %}
+        <div class="col-lg-3">
+<div id="wrap" class="text-center">
+  <!-- Button trigger modal -->
+<button class="btn btn-info" data-toggle="modal" data-target="#season_create">
+  Add Season
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="season_create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+        <br><br>
+        <h1>Modal with blur effect</h1>
+        <h2>Put here whatever you want here</h2>
+        <h4>For instance, a login form or an article content</h4>
+        <h4><kbd>esc</kbd> or click anyway to close</h4>
+        <hr>
+        <div class="alert alert-danger"><h4>You can add any html and css ;)</h4></div>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+        {% endif %}
         <div class="col-lg-3">
         </div>
     </div>

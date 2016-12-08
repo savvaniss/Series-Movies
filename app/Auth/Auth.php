@@ -57,12 +57,10 @@ class Auth
     public function isAdmin(){
         $groups=new Group;
         $user=User::find($_SESSION['user']);
-
         $group=$groups->getGroup($user->groupid);
         if($group->permission!='admin'){
             return false;
         }
         return true;
-
     }
 }

@@ -59,3 +59,4 @@ $RECYCLE.BIN/
 *.lnk
 composer.lock
 phinx.yml
+resources/files
